@@ -2,7 +2,6 @@ package go_pchomepay_sdk
 
 import (
 	"encoding/json"
-	"strconv"
 )
 
 const (
@@ -89,13 +88,13 @@ func (p *PaymentRequestData) SetATM(ExpireDays int) *PaymentRequestData {
 	return p
 }
 
-func (p *PaymentRequestData) SetCard(CardInstallment int) *PaymentRequestData {
+func (p *PaymentRequestData) SetCard(CardInstallment string) *PaymentRequestData {
 	//Installment := &PaymentRequestDataCardInfo{
 	//	Installment: CardInstallment,
 	//}
 	//p.CardInfo = append(p.CardInfo, Installment)
 	p.PayType = []string{"CARD"}
-	p.CardInstallment = strconv.Itoa(CardInstallment)
+	p.CardInstallment = CardInstallment
 	return p
 }
 
@@ -137,7 +136,7 @@ func (p PaymentRequestCall) DoTest() (res *PaymentResponseData, err error) {
 	if err != nil {
 		return
 	}
-	err = json.Unmarshal(request, res)
+	err = json.Unmarshal(request, &res)
 	if err != nil {
 		return nil, err
 	}
