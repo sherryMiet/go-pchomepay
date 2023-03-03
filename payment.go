@@ -99,6 +99,16 @@ func (p *PaymentRequestData) SetCard(CardInstallment string) *PaymentRequestData
 }
 
 func (c *Client) Payment(Data *PaymentRequestData) *PaymentRequestCall {
+	token, err := c.GetToken()
+	if err != nil {
+		return nil
+	}
+	return &PaymentRequestCall{
+		Token:              token.Token,
+		PaymentRequestData: Data,
+	}
+}
+func (c *Client) PaymentTest(Data *PaymentRequestData) *PaymentRequestCall {
 	token, err := c.GetTokenTest()
 	if err != nil {
 		return nil
@@ -108,7 +118,6 @@ func (c *Client) Payment(Data *PaymentRequestData) *PaymentRequestCall {
 		PaymentRequestData: Data,
 	}
 }
-
 func (p PaymentRequestCall) Do() (res *PaymentResponseData, err error) {
 	marshal, err := json.Marshal(p.PaymentRequestData)
 	if err != nil {
