@@ -128,7 +128,7 @@ func (p PaymentRequestCall) Do() (res *PaymentResponseData, err error) {
 	if err != nil {
 		return
 	}
-	err = json.Unmarshal(request, res)
+	err = json.Unmarshal(request, &res)
 	if err != nil {
 		return nil, err
 	}
