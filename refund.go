@@ -59,7 +59,7 @@ func (c *Client) RefundTest(Data *RefundRequestData) *RefundRequestCall {
 	}
 }
 
-func (p RefundRequestCall) Do() (res *RefundRequestData, err error) {
+func (p RefundRequestCall) Do() (res *RefundResponseData, err error) {
 	marshal, err := json.Marshal(p.RefundRequestData)
 	if err != nil {
 		return
