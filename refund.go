@@ -48,6 +48,16 @@ func (c *Client) Refund(Data *RefundRequestData) *RefundRequestCall {
 		RefundRequestData: Data,
 	}
 }
+func (c *Client) RefundTest(Data *RefundRequestData) *RefundRequestCall {
+	token, err := c.GetToken()
+	if err != nil {
+		return nil
+	}
+	return &RefundRequestCall{
+		Token:             token.Token,
+		RefundRequestData: Data,
+	}
+}
 
 func (p RefundRequestCall) Do() (res *RefundRequestData, err error) {
 	marshal, err := json.Marshal(p.RefundRequestData)
