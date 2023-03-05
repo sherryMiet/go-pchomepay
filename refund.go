@@ -39,7 +39,7 @@ func (p *RefundRequestData) CreateRefund(OrderId, RefundId string, TradeAmt int)
 }
 
 func (c *Client) Refund(Data *RefundRequestData) *RefundRequestCall {
-	token, err := c.GetTokenTest()
+	token, err := c.GetToken()
 	if err != nil {
 		return nil
 	}
@@ -49,7 +49,7 @@ func (c *Client) Refund(Data *RefundRequestData) *RefundRequestCall {
 	}
 }
 func (c *Client) RefundTest(Data *RefundRequestData) *RefundRequestCall {
-	token, err := c.GetToken()
+	token, err := c.GetTokenTest()
 	if err != nil {
 		return nil
 	}
